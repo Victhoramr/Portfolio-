@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio Pessoal</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Estilos do cabeçalho e navegação */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        /* Estilos das seções */
+        section {
+            padding: 3rem 0;
+            min-height: 80vh;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        /* Estilos da página inicial (Sobre mim) */
+        #sobre {
+            display: block; /* Página inicial visível por padrão */
+        }
+        
+        .perfil {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .foto-perfil {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #3498db;
+            margin-bottom: 1rem;
+            /* Sombra suave para melhor visualização */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Estilo temporário até a foto ser adicionada */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+            color: #777;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .bio {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hobbies {
+            margin-top: 2rem;
+        }
+        
+        .hobbies-lista {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .hobbie {
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Estilos da página de formação */
+        .formacao-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .formacao-titulo {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .formacao-periodo {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .idiomas {
+            margin-top: 2rem;
+        }
+        
+        .idioma-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: white;
+            border-radius: 5px;
+        }
+        
+        /* Estilos da página de portfólio */
+        .projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .projeto {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .projeto:hover {
+            transform: translateY(-5px);
+        }
+        
+        .projeto-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .projeto-info {
+            padding: 1.5rem;
+        }
+        
+        .projeto-titulo {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .projeto-desc {
+            margin-bottom: 1rem;
+            color: #7f8c8d;
+        }
+        
+        .projeto-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .projeto-link:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Estilos da página de contato */
+        .form-contato {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Estilos do rodapé */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .projetos {
+                grid-template-columns: 1fr;
+            }
+            
+            .hobbies-lista {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com menu de navegação -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfólio Victhor</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showSection('sobre')">Sobre Mim</a></li>
+                    <li><a href="#" onclick="showSection('formacao')">Formação</a></li>
+                    <li><a href="#" onclick="showSection('portfolio')">Portfólio</a></li>
+                    <li><a href="#" onclick="showSection('contato')">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Seção Sobre Mim -->
+        <section id="sobre" class="active">
+            <h2>Sobre Mim</h2>
+            <div class="perfil">
+                <img class="foto-perfil"src="eu.jpg" alt="">    
+                </div>
+            <div class="perfil">
+                <h3>Victhor Arantes</h3>
+            </div>
+            <div class="bio">
+                <p>Olá! Meu nome é Victhor e sou estudante de Engenharia de Software apaixonado por tecnologia e inovação.</p>
+                <p>Acredito que a tecnologia tem o poder de transformar vidas e resolver problemas complexos, e é isso que me motiva a aprender cada vez mais. Busco sempre me atualizar sobre as melhores práticas e novas tendências do mercado.</p>
+                
+                <div class="hobbies">
+                    <h3>Meus Hobbies</h3>
+                    <div class="hobbies-lista">
+                        <span class="hobbie">Basquete</span>
+                        <span class="hobbie">Games</span>
+                        <span class="hobbie">Academia</span>
+                        <span class="hobbie">Corrida</span>
+                        <span class="hobbie">Culinária</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Formação Educacional -->
+        <section id="formacao">
+            <h2>Formação Educacional</h2>
+            
+            <div class="formacao-item">
+                <h3 class="formacao-titulo">Engenharia de Software</h3>
+                <p class="formacao-periodo">2025 - 2029 | UNINTER</p>
+                <p>Graduação focada no desenvolvimento de software, abrangendo desde a análise de requisitos até a implementação e manutenção de sistemas.</p>
+            </div>
+            
+            <div class="formacao-item">
+                <h3 class="formacao-titulo">Curso de inglês B2</h3>
+                <p class="formacao-periodo">2025 | Conect You</p>
+                <p>Curso de inglês voltado principalmente para fala nivel Basico 2.</p>
+            </div>
+            
+            <div class="formacao-item">
+                <h3 class="formacao-titulo">Curso Python</h3>
+                <p class="formacao-periodo">2025 | Curso em video</p>
+                <p>Dedicado a ensinar Python do basico ao avançado, passando por estruturas condicionais, repetição etc...</p>
+            </div>
+            
+            <div class="idiomas">
+                <h3>Idiomas</h3>
+                
+                <div class="idioma-item">
+                    <span>Português</span>
+                    <span>Nativo</span>
+                </div>
+                
+                <div class="idioma-item">
+                    <span>Inglês</span>
+                    <span>Intermediário</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Portfólio -->
+        <section id="portfolio">
+            <h2>Meu Portfólio</h2>
+            
+            <div class="projetos">
+                <div class="projeto">
+                    <div class="projeto-img" style="background-color: #95a5a6; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem;">----</div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">Em construção</h3>
+                        <p class="projeto-desc">Carregando....</p>
+                        <a href="#" class="projeto-link">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="projeto">
+                    <div class="projeto-img" style="background-color: #95a5a6; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem;">-----</div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">Em construção</h3>
+                        <p class="projeto-desc">Carregando....</p>
+                        <a href="#" class="projeto-link">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="projeto">
+                    <div class="projeto-img" style="background-color: #95a5a6; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem;">------</div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">Em contrução</h3>
+                        <p class="projeto-desc">Carregando....</p>
+                        <a href="#" class="projeto-link">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="projeto">
+                    <div class="projeto-img" style="background-color: #95a5a6; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem;">------</div>
+                    <div class="projeto-info">
+                        <h3 class="projeto-titulo">Em contrução</h3>
+                        <p class="projeto-desc">Carregando....</p>
+                        <a href="#" class="projeto-link">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Contato -->
+        <section id="contato">
+            <h2>Entre em Contato</h2>
+            
+            <form class="form-contato">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" required></textarea>
+                </div>
+                
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Meu Portfólio Pessoal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Função para alternar entre as seções
+        function showSection(sectionId) {
+            // Oculta todas as seções
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Exibe a seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Previne o comportamento padrão do formulário
+        document.querySelector('.form-contato').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
